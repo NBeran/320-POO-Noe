@@ -16,6 +16,8 @@ namespace drone_base_mouvement
             int batt = 50;
             Console.SetCursorPosition(posx, posy);
             Console.Write("x-0-x");
+            Console.SetCursorPosition(posx + 1, posy + 1);
+            Console.Write(batt + "%");
             while (batt > 0)
             {
                 System.Threading.Thread.Sleep(200);
@@ -24,6 +26,8 @@ namespace drone_base_mouvement
                 batt -= 2;
                 Console.SetCursorPosition(posx, posy);
                 Console.Write("x-0-x");
+                Console.SetCursorPosition(posx + 1, posy + 1);
+                Console.Write(batt + "%");
             }
             Console.SetCursorPosition(posx, posy);
             Console.Write("_____");
