@@ -13,7 +13,7 @@ namespace drone_base_mouvement
         {
             Console.Clear();
             int posx = 0;
-            int posy = 10;
+            const int posy = 10;
             int batt = 50;
             Console.SetCursorPosition(posx, posy);
             Console.Write("x-0-x");
@@ -21,21 +21,25 @@ namespace drone_base_mouvement
             Console.Write(batt + "%");
             while (batt > 0)
             {
-                Thread.Sleep(200);
+                Thread.Sleep(100);
                 posx += 1;
                 Console.Clear();
                 batt -= 2;
+                affichage(posx, posy, batt);
+            }
+            Console.SetCursorPosition(posx, posy);
+            Console.Write("_____");
+            Console.ReadLine();
+        }
+        static void affichage(int posx, int posy, int batt){
                 Console.SetCursorPosition(posx, posy);
                 Console.Write("x-0-x");
                 Console.SetCursorPosition(posx + 1, posy + 1);
                 Console.Write(batt + "%");
             }
-            Console.SetCursorPosition(posx, posy);
-            Console.Write("_____");
 
-        }
 
-    }
+}
 
 }
 
