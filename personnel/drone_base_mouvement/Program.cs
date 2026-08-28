@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace drone_base_mouvement
@@ -20,7 +21,7 @@ namespace drone_base_mouvement
             Console.Write(batt + "%");
             while (batt > 0)
             {
-                System.Threading.Thread.Sleep(200);
+                Thread.Sleep(200);
                 posx += 1;
                 Console.Clear();
                 batt -= 2;
