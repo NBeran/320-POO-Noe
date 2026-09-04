@@ -24,6 +24,7 @@ namespace drone_base_mouvement
             _batterie = batterie;
             _vitesse = vitesse;
             _depense = depense;
+
         }
         public void Move()
         {
