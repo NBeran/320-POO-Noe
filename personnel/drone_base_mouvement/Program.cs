@@ -11,55 +11,30 @@ namespace drone_base_mouvement
     {
         static void Main(string[] args)
         {
-            Console.Clear();
-            int posx = 0;
-            int posx2 = 0;
-            const int posy = 10;
-            const int posy2 = 20;
-            int batt = 50;
-            affichage(posx, posx2, posy, posy2, batt);
-            while (batt > 0)
+            drone drone1 = new drone(0, 3, 70, 3, 2);
+            drone drone2 = new drone(0, 6, 25, 8, 2);
+            drone drone3 = new drone(90, 9, 1, 1, 1);
+            drone drone4 = new drone(0, 12, 100, 1, 1);
+            while (drone1.Batterie > 0 || drone2.Batterie > 0 || drone3.Batterie > 0 || drone4.Batterie > 0)
             {
                 Thread.Sleep(100);
-                changepos(ref posx, ref posx2, ref batt);
                 Console.Clear();
-                affichage(posx, posx2, posy, posy2, batt);
+                drone1.Move();
+                drone1.Draw();
+                drone2.Move();
+                drone2.Draw();
+                drone3.Move();
+                drone3.Draw();
+                drone4.Move();
+                drone4.Draw();
             }
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(posx, posy);
-            Console.Write("_____");
-            Console.SetCursorPosition(posx + 1, posy + 1);
-            Console.Write(batt + "%");
-            Console.SetCursorPosition(posx2, posy2);
-            Console.Write("_____");
-            Console.SetCursorPosition(posx2 + 1, posy2 + 1);
-            Console.Write(batt + "%");
+
             Console.ReadLine();
-        }
 
-        static void affichage(int posx, int posx2, int posy, int posy2, int batt)
-        {
-            Console.SetCursorPosition(posx, posy);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("x-0-x");
-            Console.SetCursorPosition(posx + 1, posy + 1);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(batt + "%");
-            Console.SetCursorPosition(posx2, posy2);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("x-0-x");
-            Console.SetCursorPosition(posx2 + 1, posy2 + 1);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(batt + "%");
-        }
 
-        static void changepos(ref int posx, ref int posx2, ref int batt)
-        {
-            batt -= 2;
-            posx += 1;
-            posx2 += 2;
-        }
 
+
+        }
     }
 
 }
