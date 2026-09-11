@@ -19,11 +19,11 @@ namespace Drones
         // Constructeur
         public Drone(int x, int y, string name)
         {
-            Random alea = new Random();
+
             this.x = x;
             this.y = y;
             this.name = name;
-            charge = alea.Next(1000); // La charge initiale de la batterie est choisie aléatoirement
+            charge = RandomHelper.Next(1000); // La charge initiale de la batterie est choisie aléatoirement
         }
 
         #region ================ Modelisation du drone et de son comportement ================
