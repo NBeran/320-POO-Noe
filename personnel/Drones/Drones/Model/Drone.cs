@@ -1,15 +1,20 @@
 ﻿using Drones.Helpers;
 using Drones.Properties;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Drones
 {
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Drone
     {
-        public int charge;                            // La charge actuelle de la batterie
-        public string name;                           // Un nom
-        public int x;                                 // Position en X depuis la gauche de l'espace aérien
-        public int y;                                 // Position en Y depuis le haut de l'espace aérien
+        private int charge ;                            // La charge actuelle de la batterie
+        private string name;                           // Un nom
+        private int x;                                 // Position en X depuis la gauche de l'espace aérien
+        private int y;                                 // Position en Y depuis le haut de l'espace aérien
+        public int Charge { get { return charge; } private set { charge = value; } }
+        public string Name { get { return name; } private set { name = value; } }
+        public int X { get { return x; } private set { x = value; } }
+        public int Y { get => y ; private set => y = value; }
 
         // Constructeur
         public Drone(int x, int y, string name)
