@@ -23,7 +23,7 @@ namespace Drones
             this.x = x;
             this.y = y;
             this.name = name;
-            charge = RandomHelper.Next(1000); // La charge initiale de la batterie est choisie aléatoirement
+            charge = RandomHelper.next(Config.MAX_LOAD); // La charge initiale de la batterie est choisie aléatoirement
         }
 
         #region ================ Modelisation du drone et de son comportement ================

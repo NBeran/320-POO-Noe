@@ -10,6 +10,6 @@ namespace Drones.Helpers
     {
         private static readonly Random alea = new Random();
 
-        public static int Next(int max) => alea.Next(max);
+        public static int next(int max) => alea.Next(max);
     }
 }
