@@ -17,7 +17,7 @@ namespace drone_base_mouvement
             Drone drone4 = new Drone(0, 20, 100, 1, 1);
             List<Drone> drones = new List<Drone> {drone1, drone2, drone3, drone4};
 
-            while (drone1.Batterie > 0 || drone2.Batterie > 0 || drone3.Batterie > 0 || drone4.Batterie > 0 )
+            while (OneIsAlive)
             {
                 Thread.Sleep(100);
                 Console.Clear();
@@ -30,6 +30,10 @@ namespace drone_base_mouvement
 
             Console.ReadLine();
 
+        }
+        static bool OneIsAlive()
+        {
+            foreach
         }
     }
 
