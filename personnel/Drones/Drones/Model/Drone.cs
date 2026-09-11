@@ -35,9 +35,12 @@ namespace Drones
         public void Update(int interval)
         {
             if (charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
-            Random alea = new Random();
-            x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            y += alea.Next(-2, 3);                     // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            double deltaX = targetx - X;
+            double deltaY = targety - Y;
+            double distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+            double step = (double)Config.SPEED * interval / 250; // Distance parcourue pendant l'intervalle,vitesse constante
+            X += (int)(deltaX / distance * step);
+            Y += (int)(deltaY / distance * step);                 // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             charge--;                                  // Il a dépensé de l'énergie
         }
 
