@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace drone_base_mouvement
 {
-    public class drone
+    public class Drone
     {
         private int _posx;
         private int _posy;
@@ -17,7 +17,7 @@ namespace drone_base_mouvement
 
         public int Batterie { get => _batterie; }
 
-        public drone(int posx, int posy, int batterie, int vitesse, int depense)
+        public Drone(int posx, int posy, int batterie, int vitesse, int depense)
         {
             _posx = posx;
             _posy = posy;

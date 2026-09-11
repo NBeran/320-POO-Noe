@@ -11,23 +11,21 @@ namespace drone_base_mouvement
     {
         static void Main(string[] args)
         {
-            drone drone1 = new drone(0, 5, 70, 3, 2);
-            drone drone2 = new drone(0, 10, 25, 8, 2);
-            drone drone3 = new drone(90, 15, 10, 1, 1);
-            drone drone4 = new drone(0, 20, 100, 1, 1);
+            Drone drone1 = new Drone(0, 5, 70, 3, 2);
+            Drone drone2 = new Drone(0, 10, 25, 8, 2);
+            Drone drone3 = new Drone(90, 15, 10, 1, 1);
+            Drone drone4 = new Drone(0, 20, 100, 1, 1);
+            List<Drone> drones = new List<Drone> {drone1, drone2, drone3, drone4};
 
             while (drone1.Batterie > 0 || drone2.Batterie > 0 || drone3.Batterie > 0 || drone4.Batterie > 0 )
             {
                 Thread.Sleep(100);
                 Console.Clear();
-                drone1.Move();
-                drone1.Draw();
-                drone2.Move();
-                drone2.Draw();
-                drone3.Move();
-                drone3.Draw();
-                drone4.Move();
-                drone4.Draw();
+                foreach (Drone drone in drones) 
+                {
+                    drone.Move();
+                    drone.Draw();
+                }
             }
 
             Console.ReadLine();
