@@ -11,6 +11,8 @@ namespace Drones
         private string name;                           // Un nom
         private int x;                                 // Position en X depuis la gauche de l'espace aérien
         private int y;                                 // Position en Y depuis le haut de l'espace aérien
+        private int targetx = RandomHelper.next(Config.AIRSPACE_WIDTH);
+        private int targety = RandomHelper.next(Config.AIRSPACE_HEIGHT);
         public int Charge { get { return charge; } private set { charge = value; } }
         public string Name { get { return name; } private set { name = value; } }
         public int X { get { return x; } private set { x = value; } }
