@@ -44,6 +44,8 @@ namespace Drones
             {
                 x = targetx;
                 y = targety;
+                targetx = RandomHelper.next(Config.AIRSPACE_WIDTH);
+                targety = RandomHelper.next(Config.AIRSPACE_HEIGHT);
                 return;                                   // Le drone s'immobilise
             }// S'il n'a plus de charge, il ne peut plus bouger
             double deltaX = targetx - X;
