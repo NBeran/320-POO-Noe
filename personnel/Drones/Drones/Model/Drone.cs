@@ -34,10 +34,17 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (charge <= 0) return;                     // S'il n'a plus de charge, il ne peut plus bouger
+            if (charge <= 0) return;
+            double distance = MathHelpers.Distance(x, y, targetx, targety);
+            if (distance <= Config.SPEED * interval / 1000)                 // L'objectif est atteint (ou tout proche)
+            {
+                x = targetx;
+                y = targety;
+                return;                                   // Le drone s'immobilise
+            }// S'il n'a plus de charge, il ne peut plus bouger
             double deltaX = targetx - X;
             double deltaY = targety - Y;
-            double distance = Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
+            
             double step = (double)Config.SPEED * interval / 250; // Distance parcourue pendant l'intervalle,vitesse constante
             X += (int)(deltaX / distance * step);
             Y += (int)(deltaY / distance * step);                 // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
