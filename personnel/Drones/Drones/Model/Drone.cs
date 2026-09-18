@@ -13,15 +13,19 @@ namespace Drones
         private int y;                                 // Position en Y depuis le haut de l'espace aérien
         private int targetx = RandomHelper.next(Config.AIRSPACE_WIDTH);
         private int targety = RandomHelper.next(Config.AIRSPACE_HEIGHT);
+        private State state;
+
         public int Charge { get { return charge; } private set { charge = value; } }
         public string Name { get { return name; } private set { name = value; } }
         public int X { get { return x; } private set { x = value; } }
         public int Y { get => y ; private set => y = value; }
 
+        enum State {CRASH, LOW_BATTERY, LOADING, ROAMING };
+
         // Constructeur
         public Drone(int x, int y, string name)
         {
-
+            state = State.ROAMING;
             this.x = x;
             this.y = y;
             this.name = name;
