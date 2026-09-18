@@ -38,7 +38,10 @@ namespace Drones
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            if (charge <= 0) return;
+            if (charge <= 0)
+            { 
+            
+            }
             double distance = MathHelpers.Distance(x, y, targetx, targety);
             if (distance <= Config.SPEED * interval / 1000)                 // L'objectif est atteint (ou tout proche)
             {
