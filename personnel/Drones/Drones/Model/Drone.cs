@@ -1,4 +1,5 @@
 ﻿using Drones.Helpers;
+using Drones.Model;
 using Drones.Properties;
 using System.Reflection.Metadata.Ecma335;
 
@@ -36,14 +37,24 @@ namespace Drones
 
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
         // que 'interval' millisecondes se sont écoulées
-        public void Update(int interval)
+        public void Update(int interval, Charger charger)
         {
             if (charge <= 0)
-            { 
-            
+            {
+                return;
             }
             double distance = MathHelpers.Distance(x, y, targetx, targety);
-            if (distance <= Config.SPEED * interval / 1000)                 // L'objectif est atteint (ou tout proche)
+            if (charge <= Config.MAX_LOAD / 4) 
+            {
+                if (state == State.ROAMING)
+                {
+                    state = State.LOW_BATTERY;
+                    targetx = charger.Posx;
+                    targety = charger.Posy;
+                }
+                
+            }
+            if (distance <= Config.SPEED * interval / 900)                 // L'objectif est atteint (ou tout proche)
             {
                 x = targetx;
                 y = targety;

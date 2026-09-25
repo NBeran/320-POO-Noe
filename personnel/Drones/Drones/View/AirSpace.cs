@@ -1,3 +1,4 @@
+using Drones.Helpers;
 using Drones.Model;
 
 namespace Drones
@@ -10,7 +11,7 @@ namespace Drones
     {
         public static readonly int WIDTH = 1200;        // Dimensions of the airspace
         public static readonly int HEIGHT = 600;
-        Charger charger = new Charger();
+        Charger charger = new Charger(Config.AIRSPACE_WIDTH / 2, Config.AIRSPACE_HEIGHT / 2);
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
 
@@ -49,7 +50,7 @@ namespace Drones
         {
             foreach (Drone drone in fleet)
             {
-                drone.Update(interval);
+                drone.Update(interval, charger);
             }
         }
 
