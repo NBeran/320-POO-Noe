@@ -27,7 +27,8 @@ namespace Drones.Model
         public int Posy { get => _posy; private set => _posx = value; }
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawEllipse(Pens.Black, _posx, _posy, 20, 20);
+            Pen pen = new Pen(Color.Black, 2);
+            drawingSpace.Graphics.DrawEllipse(pen, _posx, _posy, 20, 20);
         }
     }
 
