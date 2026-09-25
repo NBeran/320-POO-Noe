@@ -8,7 +8,7 @@ namespace Drones
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Drone
     {
-        private int charge ;                            // La charge actuelle de la batterie
+        private int charge;                            // La charge actuelle de la batterie
         private string name;                           // Un nom
         private int x;                                 // Position en X depuis la gauche de l'espace aérien
         private int y;                                 // Position en Y depuis le haut de l'espace aérien
@@ -19,9 +19,9 @@ namespace Drones
         public int Charge { get { return charge; } private set { charge = value; } }
         public string Name { get { return name; } private set { name = value; } }
         public int X { get { return x; } private set { x = value; } }
-        public int Y { get => y ; private set => y = value; }
+        public int Y { get => y; private set => y = value; }
 
-        enum State {CRASH, LOW_BATTERY, LOADING, ROAMING };
+        enum State { CRASH, LOW_BATTERY, LOADING, ROAMING };
 
         // Constructeur
         public Drone(int x, int y, string name)
@@ -44,18 +44,22 @@ namespace Drones
                 return;
             }
             double distance = MathHelpers.Distance(x, y, targetx, targety);
-            if (charge <= Config.MAX_LOAD / 4) 
+            if (charge <= Config.MAX_LOAD / 4)
             {
                 if (state == State.ROAMING)
                 {
                     state = State.LOW_BATTERY;
-                    targetx = charger.Posx;
-                    targety = charger.Posy;
+                    targetx = charger.Posx + 10;
+                    targety = charger.Posy + 10;
                 }
-                
+
             }
-            if (distance <= Config.SPEED * interval / 900)                 // L'objectif est atteint (ou tout proche)
+            if (distance <= Config.SPEED * interval / 500)                 // L'objectif est atteint (ou tout proche)
             {
+                if (state == State.LOW_BATTERY)
+                {
+                    state = State.LOADING;
+                }
                 x = targetx;
                 y = targety;
                 targetx = RandomHelper.next(Config.AIRSPACE_WIDTH);
@@ -64,11 +68,25 @@ namespace Drones
             }// S'il n'a plus de charge, il ne peut plus bouger
             double deltaX = targetx - X;
             double deltaY = targety - Y;
-            
-            double step = (double)Config.SPEED * interval / 250; // Distance parcourue pendant l'intervalle,vitesse constante
-            X += (int)(deltaX / distance * step);
-            Y += (int)(deltaY / distance * step);                 // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            charge--;                                  // Il a dépensé de l'énergie
+            if (state != State.LOADING)
+            {
+                double step = (double)Config.SPEED * interval / 250; // Distance parcourue pendant l'intervalle,vitesse constante
+                X += (int)(deltaX / distance * step);
+                Y += (int)(deltaY / distance * step);                 // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+                charge--;
+            }// Il a dépensé de l'énergie
+            else
+            {
+                if (charge > Config.MAX_LOAD - 10)
+                {
+                    charge = Config.MAX_LOAD;
+                    state = State.ROAMING;
+                }
+                else
+                {
+                    charge += 10;
+                }
+            }
         }
 
         #endregion
@@ -81,7 +99,7 @@ namespace Drones
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(charge > 0 ? Resources.drone : Resources.boom, x-Drone.SIZE/2, y - Drone.SIZE / 2, Drone.SIZE, Drone.SIZE);
+            drawingSpace.Graphics.DrawImage(charge > 0 ? Resources.drone : Resources.boom, x - Drone.SIZE / 2, y - Drone.SIZE / 2, Drone.SIZE, Drone.SIZE);
             drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, x + 5, y - 25);
         }
 
