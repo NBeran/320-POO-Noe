@@ -24,7 +24,7 @@ namespace Drones
             fleet.Add(new Drone(Config.AIRSPACE_WIDTH / 3, Config.AIRSPACE_HEIGHT / 3 + 10, "Mark"));
 
             // Démarrage
-            Application.Run(new AirSpace(fleet, pizzerias));
+            Application.Run(new AirSpace(fleet));
         }
     }
 }

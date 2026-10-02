@@ -14,10 +14,12 @@ namespace Drones
         Charger charger = new Charger(Config.AIRSPACE_WIDTH / 2, Config.AIRSPACE_HEIGHT / 2);
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
-        private List<Pizzeria> pizzerias;
-
+        private List<Pizzeria> pizzerias = new List<Pizzeria>();
+       
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
+
+        internal List<Pizzeria> Pizzerias { get => pizzerias; set => pizzerias = value; }
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
         public AirSpace(List<Drone> fleet)
@@ -29,6 +31,11 @@ namespace Drones
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
+            pizzerias.Add(new Pizzeria(RandomHelper.next(AirSpace.WIDTH), RandomHelper.next(AirSpace.HEIGHT), "Pizzeria1"));
+            pizzerias.Add(new Pizzeria(RandomHelper.next(AirSpace.WIDTH), RandomHelper.next(AirSpace.HEIGHT), "Pizzeria2"));
+            pizzerias.Add(new Pizzeria(RandomHelper.next(AirSpace.WIDTH), RandomHelper.next(AirSpace.HEIGHT), "Pizzeria3"));
+
+            Pizzeria.checkrange(pizzerias);
         }
 
         // Affichage de la situation actuelle
