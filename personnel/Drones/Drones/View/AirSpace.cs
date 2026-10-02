@@ -50,7 +50,12 @@ namespace Drones
                 
             }
             charger.Render(airspace);
+            foreach (Pizzeria pizzeria in pizzerias)
+            {
+                pizzeria.Render(airspace);
+            }
             airspace.Render();
+
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
