@@ -14,6 +14,7 @@ namespace Drones
         Charger charger = new Charger(Config.AIRSPACE_WIDTH / 2, Config.AIRSPACE_HEIGHT / 2);
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
+        private List<Pizzeria> pizzerias;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
